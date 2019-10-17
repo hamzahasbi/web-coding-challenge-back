@@ -18,12 +18,7 @@ class LikedShops
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $title;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Shop", mappedBy="list", cascade={"REMOVE"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Shop", inversedBy="lists")
      */
     private $shops;
     /**

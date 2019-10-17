@@ -46,7 +46,7 @@ class Shop
     private $thumbnail;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\LikedShops", inversedBy="shops")
+     * @ORM\OneToMany(targetEntity="App\Entity\LikedShops",  mappedBy="shops", cascade={"REMOVE"})
      */
     private $lists;
 

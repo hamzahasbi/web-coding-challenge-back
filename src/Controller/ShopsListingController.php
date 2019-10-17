@@ -7,7 +7,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Symfony\Component\HttpFoundation\Response;
 
-class ShopsListing extends AbstractFOSRestController
+class ShopsListingController extends AbstractFOSRestController
 {
     /**
      * @var ShopRepository
