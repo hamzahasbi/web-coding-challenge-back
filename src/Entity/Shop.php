@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -43,6 +44,16 @@ class Shop
      * @ORM\Column(type="string", length=500)
      */
     private $thumbnail;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\LikedShops", inversedBy="shops")
+     */
+    private $lists;
+
+    public function __construct()
+    {
+        $this->lists = new ArrayCollection();
+    }
 
     /**
      * @return int

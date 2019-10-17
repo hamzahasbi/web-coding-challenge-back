@@ -2,8 +2,10 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -14,11 +16,13 @@ class User implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"public"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Groups({"public"})
      */
     private $email;
 
@@ -32,6 +36,26 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\LikedShops", mappedBy="user")
+     */
+    private $lists;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $longitude;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $latitude;
+
+    public function __construct()
+    {
+        $this->lists = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -93,6 +117,55 @@ class User implements UserInterface
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getLists()
+    {
+        return $this->lists;
+    }
+
+    /**
+     * @param mixed $lists
+     */
+    public function setLists($lists): void
+    {
+        $this->lists = $lists;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLongitude()
+    {
+        return $this->longitude;
+    }
+
+    /**
+     * @param mixed $longitude
+     */
+    public function setLongitude($longitude): void
+    {
+        $this->longitude = $longitude;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLatitude()
+    {
+        return $this->latitude;
+    }
+
+    /**
+     * @param mixed $latitude
+     */
+    public function setLatitude($latitude): void
+    {
+        $this->latitude = $latitude;
+    }
+
 
     /**
      * @see UserInterface
