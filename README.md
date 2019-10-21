@@ -5,7 +5,7 @@ This repository represent the API behind my attempt to pass the UR web coding ch
 ## About 
 
 This small REST api is a  [symfony](https://symfony.com/4) based application .
-The API main tasks : 
+The API's main tasks : 
 -   As a User, I can sign up using my email & password
 -   As a User, I can sign in using my email & password
 -   As a User, I can display the list of shops sorted by distance
