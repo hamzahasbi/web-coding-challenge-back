@@ -75,10 +75,14 @@ class ShopsListingController extends AbstractFOSRestController
 
     }
 
-    public function GetUserLocation() {
-        return new Coordinate($this->currentUser()->getLatitude(), $this->currentUser()->getLongitude());
+    public function GetUserLocation($lon, $lat)
+    {
+//        Setting a default value to lon/lat to avoid getting exceptions.
+//        Funny fact those were my actual coordinates.
+        $lat = isset($lat) && is_float($lat) ? $lat : 33.599503299999995;
+        $lon = isset($lon) && is_float($lon) ? $lon : -7.6457280999999995;
+        return new Coordinate($lat, $lon);
     }
-
 
     /**
      * @param Shop $firstShop
@@ -97,7 +101,18 @@ class ShopsListingController extends AbstractFOSRestController
 
     }
 
-    public function getShopsAction() {
+    /**
+     * @Rest\RequestParam(name="longitude", description="User longitude", nullable=true)
+     * @Rest\RequestParam(name="latitude", description="User latitude", nullable=true)
+     * @param ParamFetcher $paramFetcher
+     * @return View
+     */
+
+    public function postShopsAction(ParamFetcher $paramFetcher) {
+        $longitude = $paramFetcher->get('longitude');
+        $latitude = $paramFetcher->get('latitude');
+
+        $coordinates = $this->GetUserLocation($latitude, $longitude);
         $shops = $this->shopRepository->findAll();
         $user = $this->currentUser();
 //        Normally we should not have empty ID since we have a valid Token but we're giving it a default value.
@@ -108,10 +123,23 @@ class ShopsListingController extends AbstractFOSRestController
             return $item->getShops();
         }, $list);
 
+//        @TODO: Remove array_filter and filter Query in a database call.
         $shops = array_filter($shops, function ($item) use ($items){
             return !in_array($item, $items);
         }) ;
-        usort($shops, [$this, "sortPredicat"]);
+//        [$this, "sortPredicat"]
+        usort($shops, function (Shop $firstShop, Shop $secondShop) use ($coordinates){
+            $firstShopCoordinates = new Coordinate($firstShop->getLatitude(),
+                $firstShop->getLongitude());
+            $secondShopCoordinates = new Coordinate($secondShop->getLatitude(),
+                $secondShop->getLongitude());
+
+            $distanceToFirst = $firstShopCoordinates->getDistance($coordinates, new Haversine());
+            $distanceToSecond = $secondShopCoordinates->getDistance($coordinates, new Haversine());
+
+            if ($distanceToFirst === $distanceToSecond) return 0;
+            return ($distanceToFirst < $distanceToSecond ? -1 : 1);
+        });
 
         return $this->view($shops, Response::HTTP_OK);
     }

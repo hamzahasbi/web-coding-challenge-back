@@ -56,8 +56,6 @@ class RegistrationController extends AbstractFOSRestController
     public function register(Request $request) {
         $email = $request->get('email');
         $password = $request->get('password');
-        $longitude = $request->get('longitude');
-        $latitude = $request->get('latitude');
 
         $alreadyRegistred = $this->repository->findOneBy(['email' => $email]);
         if(isset($alreadyRegistred) && !empty($alreadyRegistred)) {
@@ -66,8 +64,6 @@ class RegistrationController extends AbstractFOSRestController
 
         $user = new User();
         $user->setEmail($email);
-        $user->setLatitude($latitude);
-        $user->setLongitude($longitude);
         $user->setPassword(
             $this->encoder->encodePassword($user, $password)
         );

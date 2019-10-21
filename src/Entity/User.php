@@ -42,15 +42,6 @@ class User implements UserInterface
      */
     private $lists;
 
-    /**
-     * @ORM\Column(type="float")
-     */
-    private $longitude;
-
-    /**
-     * @ORM\Column(type="float")
-     */
-    private $latitude;
 
     public function __construct()
     {
@@ -132,38 +123,6 @@ class User implements UserInterface
     public function setLists($lists): void
     {
         $this->lists = $lists;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getLongitude()
-    {
-        return $this->longitude;
-    }
-
-    /**
-     * @param mixed $longitude
-     */
-    public function setLongitude($longitude): void
-    {
-        $this->longitude = $longitude;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getLatitude()
-    {
-        return $this->latitude;
-    }
-
-    /**
-     * @param mixed $latitude
-     */
-    public function setLatitude($latitude): void
-    {
-        $this->latitude = $latitude;
     }
 
 
