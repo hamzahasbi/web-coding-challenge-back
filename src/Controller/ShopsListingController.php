@@ -69,12 +69,20 @@ class ShopsListingController extends AbstractFOSRestController
     }
 
 
+    /**
+     * @return \App\Entity\User|null
+     */
     public function currentUser() {
         $decodedJwtToken = $this->jwtManager->decode($this->tokenStorageInterface->getToken());
         return $this->userRepository->findOneBy(['email' => $decodedJwtToken['username']]);
 
     }
 
+    /**
+     * @param $lon
+     * @param $lat
+     * @return Coordinate
+     */
     public function GetUserLocation($lon, $lat)
     {
 //        Setting a default value to lon/lat to avoid getting exceptions.

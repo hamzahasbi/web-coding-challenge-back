@@ -33,16 +33,26 @@ class LikedShops
     private $user;
 
 
+    /**
+     * LikedShops constructor.
+     */
     public function __construct()
     {
         $this->shops = new ArrayCollection();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @param Shop $shop
+     * @return LikedShops
+     */
     public function addShop(Shop $shop): self
     {
         if (!$this->shops->contains($shop)) {
@@ -50,6 +60,11 @@ class LikedShops
         }
         return $this;
     }
+
+    /**
+     * @param Shop $shop
+     * @return LikedShops
+     */
     public function removeShop(Shop $shop): self
     {
         if ($this->shops->contains($shop)) {

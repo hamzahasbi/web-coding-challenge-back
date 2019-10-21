@@ -5,6 +5,10 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 
+/**
+ * Trait Timestamps
+ * @package App\Entity
+ */
 trait Timestamps
 {
     /**

@@ -50,6 +50,9 @@ class Shop
      */
     private $lists;
 
+    /**
+     * Shop constructor.
+     */
     public function __construct()
     {
         $this->lists = new ArrayCollection();
