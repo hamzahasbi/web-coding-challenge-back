@@ -36,7 +36,7 @@ After you've set the environnement you need to follow these steps :
 |  /api/shops| POST | {latitude, longitude} | Gets the shops sorted by distance |  
 |  /api/shops/liked| GET |  | Gets the shops liked by the current user |  
 |  api/shops/likes| POST | {shopID} | Added the Shop to the list of liked shops (liked by the current user)|  
-|  /api/sign_up| POST |  {username, password, lon, lat}| creates an Account using the provided data |  
+|  /api/sign_up| POST |  {username, password}| creates an Account using the provided data |  
   
 ## Authentication   
 The authentication is based on [JWT](https://jwt.io/) .  
