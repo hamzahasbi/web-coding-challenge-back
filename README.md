@@ -51,7 +51,8 @@ To request data from the API you'll need to send a valid token with each request
  - [mjaschen/phpgeo](https://github.com/mjaschen/phpgeo) : provides abstractions to geographical coordinate .  
 ## Features  
   The available feature as for now are the ones listed in the Endpoints section.  
-## TODO At this point we still have some buggy/incomplete features :  
+## TODO 
+At this point we still have some buggy/incomplete features :  
  - [ ] Dislike shops.  
  - [ ] Get dynamic user coordinates.  
  - [ ] remove a shop from liked shops list.  
