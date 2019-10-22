@@ -21,8 +21,8 @@ The API's main tasks :
  - composer
 #### Config :
 
-    .env File is your friend.
-
+    .env File is your friend if you wanna change the mysql port.
+**It's recommended to use default server port :80 (Front End mapping)**
 After you've set the environnement you need to follow these steps :  
   
  - `composer install`  
