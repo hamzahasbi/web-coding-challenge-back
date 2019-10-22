@@ -14,7 +14,7 @@ The API's main tasks :
 ## Instructions  
   #### Requirements:
 
- - php >= 7.1
+ - php >= 7.3
  - mysql .
  - Apache
  - openssl (to generate a key related to JWT).
