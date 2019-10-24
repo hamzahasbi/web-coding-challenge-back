@@ -56,7 +56,7 @@ To request data from the API you'll need to send a valid token with each request
 At this point we still have some buggy/incomplete features :  
  - [ ] Dislike shops.  
  - [ ] Get dynamic user coordinates.  
- - [ ] Dislike a Shop.  
+ - [ ] Remove a shop from liked shops list.  
  - [ ] Refactoring.  
  - [ ] Securing token exchange. 
  - [ ] Complete the docker image. 
