@@ -135,7 +135,6 @@ class ShopsListingController extends AbstractFOSRestController
         $shops = array_filter($shops, function ($item) use ($items){
             return !in_array($item, $items);
         }) ;
-//        [$this, "sortPredicat"]
         usort($shops, function (Shop $firstShop, Shop $secondShop) use ($coordinates){
             $firstShopCoordinates = new Coordinate($firstShop->getLatitude(),
                 $firstShop->getLongitude());
@@ -194,6 +193,26 @@ class ShopsListingController extends AbstractFOSRestController
         $this->entityManager->flush();
 
         return $this->view($shop, Response::HTTP_CREATED);
+    }
+
+    /**
+     * @Rest\RequestParam(name="shop", description="Shop Id", nullable=false)
+     * @param ParamFetcher $paramFetcher
+     * @return View
+     */
+    public function deleteShopDislikeAction(ParamFetcher $paramFetcher) {
+        $shopToRemove = $paramFetcher->get('shop');
+        $user = $this->currentUser();
+        $userId = isset($user) && !empty($user) ? $user->getId() : 1;
+        $likedShop = $this->likedShopsRepository->findOneBy(['shops' => $shopToRemove, 'user' => $userId]);
+        if (isset($likedShop) && !empty($likedShop)) {
+            $this->entityManager->remove($likedShop);
+            $this->entityManager->flush();
+            return $this->view(['message' => 'Shop removed from your preferred list'],
+                Response::HTTP_OK);
+        }
+        return $this->view(['message' => 'Error while removing the Shop from the list'],
+            Response::HTTP_BAD_REQUEST);
     }
 
 }

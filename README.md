@@ -36,6 +36,7 @@ After you've set the environnement you need to follow these steps :
 |  /api/shops| POST | {latitude, longitude} | Gets the shops sorted by distance |  
 |  /api/shops/liked| GET |  | Gets the shops liked by the current user |  
 |  api/shops/likes| POST | {shopID} | Added the Shop to the list of liked shops (liked by the current user)|  
+|  api/shop/dislike| DELETE | {shopID} | Remove the Shop From the list of liked shops |  
 |  /api/sign_up| POST |  {username, password}| creates an Account using the provided data |  
   
 ## Authentication   
@@ -55,7 +56,6 @@ To request data from the API you'll need to send a valid token with each request
 At this point we still have some buggy/incomplete features :  
  - [ ] Dislike shops.  
  - [ ] Get dynamic user coordinates.  
- - [ ] remove a shop from liked shops list.  
  - [ ] Dislike a Shop.  
  - [ ] Refactoring.  
  - [ ] Securing token exchange. 
